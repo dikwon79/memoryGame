@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>Simple Memory Game</title>
+</head>
+<body>
+    
+    <div id="main">
+      <label for="numinput">How many buttons to create?</label>
+    
+      <div>
+        <input type="number" id="numinput" min="3" max="7">
+        <button onclick="gameStart()">Go!</button>
+      </div>
+    </div>
+    <br/>
+    <div id="content">
+     <div id="message"></div>
+     <div id="buttonContainer"></div>
+    </div>
+ 
+
+    <script src="lang/messages/en/user.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

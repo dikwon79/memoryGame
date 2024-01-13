@@ -1,0 +1,62 @@
+/* css/styles.css */
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+#content{
+  display:flex;
+  height: 300px;
+
+}
+#message {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 5em;
+  margin-top: 20px;
+  background-color: green;
+  border-radius: 35%;
+  color: white;
+  width: 800px;
+  height: 400px;
+  padding: 10px;
+  align-items: center; /* Center horizontally */
+  line-height: 400px; /* Center vertically, set it to the height of the #message */
+}
+
+
+/* 나머지 스타일은 그대로 유지합니다. */
+label {
+  font-size: 3em;
+  margin-left: 3px;
+}
+
+input {
+  width: 500px;
+  height: 50px;
+  margin-top: 2px;
+  margin-left: 3px;
+  font-size: 3em;
+}
+
+#buttonContainer button {
+  width: 10em;
+  height: 5em;
+  margin: 3px;
+}
+
+button{
+  position: relative;
+  width: 5em;
+  height: 4.1em;
+  top : -12px;
+}
