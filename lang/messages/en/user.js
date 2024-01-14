@@ -1,10 +1,10 @@
+//string messages
 const messages = {
-    welcome: "Welcome to our application!",
-    goodbye: "Goodbye! See you next time.",
     error: {
       correctOrder: 'Correct orders',
       incorrectOrder: 'Wrong orders!',
-      excellent: 'Excellent memory!'
+      excellent: 'Excellent memory!',
+      condition: 'input error(3~7)',
     },
     gameover: "Game Over",
 };

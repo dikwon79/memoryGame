@@ -9,11 +9,7 @@ body {
   margin: 0;
 }
 
-#content{
-  display:flex;
-  height: 300px;
 
-}
 #message {
   display: none;
   position: absolute;
@@ -29,12 +25,11 @@ body {
   width: 800px;
   height: 400px;
   padding: 10px;
-  align-items: center; /* Center horizontally */
-  line-height: 400px; /* Center vertically, set it to the height of the #message */
+  align-items: center;
+  line-height: 400px; 
 }
 
 
-/* 나머지 스타일은 그대로 유지합니다. */
 label {
   font-size: 3em;
   margin-left: 3px;

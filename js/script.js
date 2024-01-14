@@ -10,6 +10,7 @@ class Button{
     game.handleButtonClick(this.number);
     
   }
+  //for clickable later
   addClickEvent(game) {
     this.element.onclick = () => this.onClick(game);
   }
@@ -23,6 +24,7 @@ class Game{
   }
   createButtons(numButtons){
   
+    // create as many buttons as I type in the input box.
     for(let i = 1; i <= numButtons; i++){
       const button = new Button(i);
       button.element.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -31,17 +33,28 @@ class Game{
     }
   }
   gameStart(){
+    //to get data from input box
     const numButtons = document.getElementById('numinput').value;
+    //find the dom which is the message div 
+    const msg = document.getElementById("message");
+    //find question label and input box
+    const main = document.getElementById('main');
 
+    //if input value is bewteen 3 and 7
     if(numButtons >=3 && numButtons <=7){
-
-      console.log(this.buttons);
-      console.log(this.clickedOrder);
-      const main = document.getElementById('main');
+      
+      //label and input box make invisible
       main.style.display = "none";
-      this.clearGame();
-      this.createButtons(numButtons);
 
+      // screen and all variables are initialized.  
+      this.clearGame();
+
+      //using button class, make the buttons
+      this.createButtons(numButtons);
+      
+      //every 2 seconds, as much as maden buttons,
+      //Call a function that scrambles after searching elements 
+      //of the array. At the end, remove the number of the button 
       for (let i = 1; i <= numButtons; i++) {
         setTimeout(() => {
           this.buttons.forEach(button => {
@@ -52,61 +65,77 @@ class Game{
             }
            
           });
-        }, i * 2000);  // 각 호출 간격을 2초로 설정
+        }, i * 2000);  
       }
       
 
     }
-    console.log(this.buttons);
+    //input value is error : less than 3 or more than 7
+    else{
+
+      msg.style.display = "block";
+      msg.innerHTML = messages.error.condition;
+ 
+      //after 3 seconds, close the message and comes out menu again.
+      setTimeout(() => {
+        msg.style.display = "none";
+        main.style.display = "block";   
+        this.clearGame();
+      }, 3000);
+
+    }
   }
   handleButtonClick(clickedNumber) {
-    // 클릭된 버튼의 숫자를 배열에 추가
-    
-    let msg = document.getElementById("message");
+  
+    const msg = document.getElementById("message");
     const main = document.getElementById('main');
     msg.style.display = "none";
 
-    console.log(this.buttons);
-    
+    //clicked button is saved in the click array
     this.clickedOrder.push(clickedNumber);
-
+    
+    // compare clicked number with created button array
     if (clickedNumber == this.buttons[this.clickedOrder.length-1].number){
-      
+      //if it is same, 
       msg.innerHTML = messages.error.correctOrder;
     }else{
-      //클릭시 틀릴경우.....
+      //else if it is wrong
+
+      //show the message div
       msg.style.display = "block";
+      // show the message(game over)
       msg.innerHTML = messages.gameover;
       
+      //if I clicked wrong button, then show all the button order!
       for (let i=0; i < this.buttons.length; i++){
-        console.log("1:"+this.buttons[i].number);
+        
         this.buttons[i].element.innerHTML = this.buttons[i].number;
 
       }
       
 
-      // 1초 후에 msg 요소의 스타일을 block으로 변경
+      // after 3 seconds, message div dont show and first page label comes out
       setTimeout(() => {
         msg.style.display = "none";
-        main.style.display = "block";
-        
+        main.style.display = "block";   
         this.clearGame();
       }, 3000);
 
     }
     
-    // 모든 버튼을 클릭한 경우
+    //  all buttons clicked in the situation
     if (this.clickedOrder.length === this.buttons.length) {
-      // buttons 배열과 clickedOrder 배열을 비교하여 메시지 출력
+      // compare  buttons array and clickedOrder array 
       const isCorrectOrder = this.clickedOrder.every((value, index) => value === this.buttons[index].number);
-
+      
+      // if true, print exccelent on screen
       if (isCorrectOrder) {
         msg.innerHTML = messages.error.excellent;
         msg.style.display = "block";
         //msg.style.zIndex = "1";  // z-index 속성 추가
-        msg.parentNode.insertBefore(msg, msg.parentNode.firstChild);
+        //msg.parentNode.insertBefore(msg, msg.parentNode.firstChild);
         
-        // 1초 후에 msg 요소의 스타일을 block으로 변경
+       
         setTimeout(() => {
           msg.style.display = "none";
           main.style.display = "block";
@@ -116,23 +145,30 @@ class Game{
 
 
       } 
-      // 클릭 순서 초기화
+      //clicke order initailize
       this.clickedOrder = [];
     }
   }
   
   scrambleButtons(button){
+    // Set the maximum X,Y-coordinate value to ensure that the button 
+    // does not go beyond the right edge of the window.
+
     const maxX = window.innerWidth - button.element.clientWidth;
     const maxY = window.innerHeight - button.element.clientHeight;
-
+    
+    // Generate a random X,Y-coordinate within the valid range (0 to maxX).
     const randomX = Math.floor(Math.random() * maxX);
     const randomY = Math.floor(Math.random() * maxY);
     
+    // set the CSS property of the button 
     button.element.style.position = 'absolute';  
     button.element.style.left = `${randomX}px`;
     button.element.style.top = `${randomY}px`;
   }
   clearGame(){
+
+    //delete screen old button and initialization
     const container = document.getElementById('buttonContainer');
     container.innerHTML = '';
     this.buttons = [];
