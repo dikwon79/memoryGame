@@ -1,3 +1,5 @@
+//Partly I used chat gpt
+
 class Button{
   constructor(number){
     this.number = number;
@@ -132,10 +134,8 @@ class Game{
       if (isCorrectOrder) {
         msg.innerHTML = messages.error.excellent;
         msg.style.display = "block";
-        //msg.style.zIndex = "1";  // z-index 속성 추가
-        //msg.parentNode.insertBefore(msg, msg.parentNode.firstChild);
+        msg.style.zIndex = "1";  // z-index 속성 추가
         
-       
         setTimeout(() => {
           msg.style.display = "none";
           main.style.display = "block";
